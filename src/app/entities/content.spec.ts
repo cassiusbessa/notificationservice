@@ -1,0 +1,16 @@
+import { Content } from './content';
+
+describe('Content', () => {
+  it('should be able to create a notification content', () => {
+    const content = new Content('Hello World');
+    expect(content).toBeTruthy();
+  });
+
+  it('should not be able to create a notification content with less than 5 characters', () => {
+    expect(() => new Content('1234')).toThrowError();
+  });
+
+  it('should not be able to create a notification content with more than 240 characters', () => {
+    expect(() => new Content('a'.repeat(241))).toThrow();
+  });
+});
