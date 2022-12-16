@@ -1,4 +1,4 @@
-import { NotficationNotFound } from './errors/notification-not-found';
+import { NotificationNotFound } from './errors/notification-not-found';
 import { InMemoryNotificationsRepository } from '../../../test/in-memory-notifications-repository';
 import { Content } from '../entities/content';
 import { Notification } from '../entities/notification';
@@ -28,16 +28,16 @@ describe('SendNotification', () => {
     );
   });
 
-  it('should not be able to cancel a notification that does not exist', async () => {
+  it('should not be able to cancel a non existing notification', async () => {
     const mockNotificationRepository = new InMemoryNotificationsRepository();
     const cancelNotification = new CancelNotification(
       mockNotificationRepository,
     );
 
-    await expect(() => {
-      cancelNotification.execute({
-        notificationId: '1',
+    expect(() => {
+      return cancelNotification.execute({
+        notificationId: 'fake-notification-id',
       });
-    }).rejects.toThrow(NotficationNotFound);
+    }).rejects.toThrow(NotificationNotFound);
   });
 });
