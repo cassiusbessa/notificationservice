@@ -1,3 +1,4 @@
+import { HTTPNotificationAdapter } from '../httpNotificationAdapter/http-notification-adpter';
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
 import { SendNotification } from 'src/app/useCase/send-notification';
@@ -13,6 +14,8 @@ export class NotificationsController {
       category,
       recipientId,
     });
-    return notification;
+    return {
+      notification: HTTPNotificationAdapter.toHTTP(notification),
+    };
   }
 }
