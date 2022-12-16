@@ -6,4 +6,14 @@ export class InMemoryNotificationsRepository implements NotificationRepository {
   async create(notification: Notification): Promise<void> {
     this.notifications.push(notification);
   }
+  async findById(id: string): Promise<Notification | null> {
+    return this.notifications.find((n) => n.id === id) || null;
+  }
+  async save(notification: Notification): Promise<void> {
+    const index = this.notifications.findIndex((n) => n.id === notification.id);
+    if (index === -1) {
+      throw new Error('Notification not found');
+    }
+    this.notifications[index] = notification;
+  }
 }
