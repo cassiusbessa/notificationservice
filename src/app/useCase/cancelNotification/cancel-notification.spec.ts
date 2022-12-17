@@ -4,7 +4,7 @@ import { InMemoryNotificationsRepository } from '../../../../test/in-memory-noti
 import { CancelNotification } from './cancel-notification';
 
 describe('SendNotification', () => {
-  it('should be able to send a notification', async () => {
+  it('should be able to cancel a notification', async () => {
     const mockNotificationRepository = new InMemoryNotificationsRepository();
     const cancelNotification = new CancelNotification(
       mockNotificationRepository,
