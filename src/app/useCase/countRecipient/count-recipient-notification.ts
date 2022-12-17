@@ -1,4 +1,4 @@
-import { NotificationRepository } from '../repositories/notifications-repository';
+import { NotificationRepository } from '../../repositories/notifications-repository';
 import { Injectable } from '@nestjs/common';
 
 export interface CountRecipientNotificationRequest {

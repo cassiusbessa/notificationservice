@@ -1,7 +1,7 @@
 import { HTTPNotificationAdapter } from '../httpNotificationAdapter/http-notification-adpter';
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
-import { SendNotification } from 'src/app/useCase/send-notification';
+import { SendNotification } from 'src/app/useCase/sendNotification/send-notification';
 
 @Controller('notifications')
 export class NotificationsController {
