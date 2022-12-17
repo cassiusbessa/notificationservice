@@ -1,6 +1,6 @@
-import { NotificationNotFound } from './../src/app/useCase/errors/notification-not-found';
-import { Notification } from 'src/app/entities/notification';
-import { NotificationRepository } from 'src/app/repositories/notifications-repository';
+import { NotificationNotFound } from '@app/useCase/errors/notification-not-found';
+import { Notification } from '@app/entities/notification';
+import { NotificationRepository } from '@app/repositories/notifications-repository';
 
 export class InMemoryNotificationsRepository implements NotificationRepository {
   public notifications: Notification[] = [];
