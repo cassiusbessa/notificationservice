@@ -7,7 +7,7 @@ import { makeNotification } from '@test/factories/notification-factory';
 describe('Count recipients notifications', () => {
   it('should be able to count recipient notifications', async () => {
     const mockNotificationRepository = new InMemoryNotificationsRepository();
-    const coutNotification = new CountRecipientNotification(
+    const countNotification = new CountRecipientNotification(
       mockNotificationRepository,
     );
 
@@ -19,7 +19,7 @@ describe('Count recipients notifications', () => {
       makeNotification({ recipientId: '2' }),
     );
 
-    const { count } = await coutNotification.execute({
+    const { count } = await countNotification.execute({
       recipientId: '1',
     });
 
