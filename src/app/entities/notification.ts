@@ -66,4 +66,12 @@ export class Notification {
   public get createdAt(): Date {
     return this.props.createdAt;
   }
+
+  public read(): void {
+    this.props.readAt = new Date();
+  }
+
+  public unRead(): void {
+    this.props.readAt = null;
+  }
 }
