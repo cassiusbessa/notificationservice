@@ -1,42 +1,25 @@
 import { CountRecipientNotification } from './count-recipient-notification';
 import { NotificationNotFound } from './errors/notification-not-found';
 import { InMemoryNotificationsRepository } from '../../../test/in-memory-notifications-repository';
-import { Content } from '../entities/content';
-import { Notification } from '../entities/notification';
 import { CancelNotification } from './cancel-notification';
+import { makeNotification } from '@test/factories/notification-factory';
 
 describe('Count recipients notifications', () => {
   it('should be able to count recipient notifications', async () => {
     const mockNotificationRepository = new InMemoryNotificationsRepository();
-    const cancelNotification = new CountRecipientNotification(
+    const coutNotification = new CountRecipientNotification(
       mockNotificationRepository,
     );
 
-    await mockNotificationRepository.create(
-      new Notification({
-        recipientId: '1',
-        content: new Content('Solicitação de pagamento'),
-        category: 'payment',
-      }),
-    );
+    await mockNotificationRepository.create(makeNotification());
+
+    await mockNotificationRepository.create(makeNotification());
 
     await mockNotificationRepository.create(
-      new Notification({
-        recipientId: '1',
-        content: new Content('Solicitação de amizade'),
-        category: 'social',
-      }),
+      makeNotification({ recipientId: '2' }),
     );
 
-    await mockNotificationRepository.create(
-      new Notification({
-        recipientId: '2',
-        content: new Content('Solicitação de amizade'),
-        category: 'social',
-      }),
-    );
-
-    const { count } = await cancelNotification.execute({
+    const { count } = await coutNotification.execute({
       recipientId: '1',
     });
 
