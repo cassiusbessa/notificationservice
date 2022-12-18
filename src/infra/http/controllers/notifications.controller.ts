@@ -7,7 +7,10 @@ import { HTTPNotificationAdapter } from '../httpNotificationAdapter/http-notific
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
 import { SendNotification } from '@app/useCase/sendNotification/send-notification';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ResponseCreateNotification } from '../dtos/response-create-notification';
 
+@ApiTags('notifications')
 @Controller('notifications')
 export class NotificationsController {
   constructor(
@@ -18,6 +21,11 @@ export class NotificationsController {
     private readonly countRecipientNotification: CountRecipientNotification,
     private readonly getRecipientNotification: GetRecipientNotification,
   ) {}
+
+  @ApiCreatedResponse({
+    description: 'The record has been successfully created.',
+    type: ResponseCreateNotification,
+  })
   @Post()
   async create(@Body() body: CreateNotificationBody) {
     const { content, category, recipientId } = body;
