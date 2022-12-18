@@ -3,7 +3,7 @@ import { NotificationRepository } from '@app/repositories/notifications-reposito
 import { Notification } from '@app/entities/notification';
 import { PrismaService } from '../prisma.service';
 import { Injectable } from '@nestjs/common';
-import { NotificationNotFound } from '@app/useCase/errors/notification-not-found';
+import { PrismaNotificationNotFound } from '../errors/prisma-notification-not-found';
 
 @Injectable()
 export class PrismaNotificationsRepository implements NotificationRepository {
@@ -33,7 +33,7 @@ export class PrismaNotificationsRepository implements NotificationRepository {
       },
     });
     if (!notification) {
-      throw new NotificationNotFound();
+      throw new PrismaNotificationNotFound();
     }
     return PrismaNotificationAdpter.toDomain(notification);
   }
