@@ -1,7 +1,7 @@
-import { PrismaNotificationAdpter } from '../database/prisma/adapters/prisma-notifications-adapter';
+import { PrismaNotificationAdpter } from '../adapters/prisma-notifications-adapter';
 import { NotificationRepository } from '@app/repositories/notifications-repository';
 import { Notification } from '@app/entities/notification';
-import { PrismaService } from '../database/prisma/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { Injectable } from '@nestjs/common';
 import { NotificationNotFound } from '@app/useCase/errors/notification-not-found';
 
