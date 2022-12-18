@@ -4,10 +4,22 @@ import { UnreadNotification } from '@app/useCase/unreadNotification/unread-notif
 import { ReadNotification } from '@app/useCase/readNotification/read-notification';
 import { CancelNotification } from '@app/useCase/cancelNotification/cancel-notification';
 import { HTTPNotificationAdapter } from '../httpNotificationAdapter/http-notification-adpter';
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  HttpStatus,
+} from '@nestjs/common';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
 import { SendNotification } from '@app/useCase/sendNotification/send-notification';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { ResponseCreateNotification } from '../dtos/response-create-notification';
 
 @ApiTags('notifications')
@@ -39,6 +51,10 @@ export class NotificationsController {
     };
   }
 
+  @ApiNotFoundResponse({
+    description: 'Notification not found',
+    status: HttpStatus.NOT_FOUND,
+  })
   @Patch('read/:id')
   async read(@Param('id') id: string) {
     await this.readNotification.execute({
@@ -46,6 +62,10 @@ export class NotificationsController {
     });
   }
 
+  @ApiNotFoundResponse({
+    description: 'Notification not found',
+    status: HttpStatus.NOT_FOUND,
+  })
   @Patch('unread/:id')
   async unread(@Param('id') id: string) {
     await this.unreadNotification.execute({
@@ -53,6 +73,10 @@ export class NotificationsController {
     });
   }
 
+  @ApiNotFoundResponse({
+    description: 'Notification not found',
+    status: HttpStatus.NOT_FOUND,
+  })
   @Patch('cancel/:id')
   async cancel(@Param('id') id: string) {
     await this.cancelNotification.execute({
@@ -60,6 +84,10 @@ export class NotificationsController {
     });
   }
 
+  @ApiNotFoundResponse({
+    description: 'Notification not found',
+    status: HttpStatus.NOT_FOUND,
+  })
   @Get('/recipient/:recipientId')
   async getFromRecipient(@Param('recipientId') recipientId: string) {
     const { notifications } = await this.getRecipientNotification.execute({
@@ -68,6 +96,10 @@ export class NotificationsController {
     return { notifications: notifications.map(HTTPNotificationAdapter.toHTTP) };
   }
 
+  @ApiNotFoundResponse({
+    description: 'Notification not found',
+    status: HttpStatus.NOT_FOUND,
+  })
   @Get('/recipient/count/:recipientId')
   async countFromRecipient(@Param('recipientId') recipientId: string) {
     const { count } = await this.countRecipientNotification.execute({
