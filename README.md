@@ -2,7 +2,7 @@
 
 Notifications Service é uma api de microserviço capaz de enviar notificações para sistemas que usam a mesma mensageria kafka do serviço. Foi desenvolvido usando clean architecture.
 
-## Documentation
+## Documentação
 
 Após iniciar a aplicação, [acesse](http://localhost:3000/api#/)
 
